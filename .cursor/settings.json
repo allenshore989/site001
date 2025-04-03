@@ -1,0 +1,102 @@
+{
+  // 基础编辑器性能设置
+  "editor.largeFileOptimizations": true,
+  "editor.maxTokenizationLineLength": 10000,
+  "editor.scrollBeyondLastLine": false,
+  "editor.wordWrap": "on",
+  
+  // 自动保存设置 - 即时保存所有更改
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,  // 仅1秒延迟，几乎实时保存
+  
+  // 自动确认设置
+  "editor.acceptSuggestionOnEnter": "on", // 按Enter自动接受建议
+  "editor.quickSuggestions": {
+    "other": true,
+    "comments": true,
+    "strings": true
+  },
+  "editor.suggestSelection": "first", // 自动选择第一个建议
+  "dialog.defaultButton": "confirm", // 默认选择确认按钮
+
+  // 开发与调试自动化
+  "editor.formatOnSave": true,      // 保存时自动格式化代码
+  "editor.formatOnPaste": true,     // 粘贴时自动格式化
+  "editor.codeActionsOnSave": {     // 保存时自动修复问题
+    "source.fixAll": true,
+    "source.organizeImports": true
+  },
+  
+  // 自动运行任务设置
+  "task.autoDetect": "on",          // 自动检测任务
+  "task.allowAutomaticTasks": "on", // 允许自动任务
+  "debug.onTaskErrors": "showErrors", // 显示任务错误
+  
+  // 调试自动化设置
+  "debug.saveBeforeStart": "allEditorsInActiveGroup", // 启动调试前保存所有编辑器
+  "debug.inlineValues": true,       // 显示内联值
+  "debug.toolBarLocation": "docked", // 调试工具栏固定
+  "debug.focusEditorOnBreak": false, // 断点时不强制焦点到编辑器
+  "debug.openDebug": "openOnDebugBreak", // 断点时自动打开调试面板
+  
+  // 文件自动保存备份
+  "files.hotExit": "onExitAndWindowClose", // 退出时自动保存
+  "files.restoreUndoStack": true,   // 恢复撤销堆栈
+  
+  // 禁用干扰自动化流程的确认对话框
+  "explorer.confirmDelete": false,  // 禁用删除确认
+  "explorer.confirmDragAndDrop": false, // 禁用拖放确认
+  "security.allowUnsafeActions": true, // 允许不安全操作而不提示
+  
+  // AI辅助设置
+  "ai.enabled": true,
+  "ai.inferenceBackend": "onnx",    // 使用更稳定的后端
+  "ai.modelQuantization": "int8",   // 降低内存使用
+  "ai.maxContextTokens": 2048,
+  "ai.experimental.gpuAcceleration": false,
+  
+  // 性能优化
+  "cursor.memoryLimitMB": 12288,    // 12GB内存限制
+  "workbench.editor.enablePreview": false, // 禁用预览模式保持文件始终打开
+  
+  // 自动扩展安装
+  "extensions.autoCheckUpdates": false, // 禁用扩展更新检查
+  "extensions.autoUpdate": false,   // 禁用扩展自动更新
+  
+  // 终端集成设置
+  "terminal.integrated.allowChords": false, // 允许键盘快捷键传递到终端
+  "terminal.integrated.defaultProfile.windows": "Command Prompt",
+  "terminal.integrated.defaultProfile.osx": "bash",
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.scrollback": 10000, // 增加回滚缓冲区
+  
+  // 文件监视设置 - 保持对变更的监控
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/*/**": true,   // 仅排除深层node_modules
+    "**/.hg/store/**": true
+  },
+  
+  // 减少文件索引排除 - 确保能找到所有相关文件
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.git": true
+  },
+  
+  // 自动刷新设置
+  "files.refactoring.autoSave": true, // 重构时自动保存
+  "explorer.autoReveal": true,      // 自动显示当前文件在资源管理器中的位置
+  "workbench.editor.closeOnFileDelete": false, // 文件删除时不关闭编辑器
+  
+  // 减少用户干预
+  "update.mode": "manual",          // 手动更新应用
+  "telemetry.telemetryLevel": "off", // 关闭遥测
+  "workbench.startupEditor": "none", // 启动时不显示欢迎页
+  
+  // 保持界面响应
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorSmoothCaretAnimation": "off", // 关闭光标动画
+  "workbench.list.smoothScrolling": false,
+  "editor.smoothScrolling": false
+}

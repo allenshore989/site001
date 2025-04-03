@@ -1,36 +1,121 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 美熙有限公司官方网站
 
-## Getting Started
+这是美熙有限公司的官方网站源代码，使用Next.js和Tailwind CSS构建。
 
-First, run the development server:
+## 技术栈
+
+- [Next.js](https://nextjs.org/) - React框架
+- [Tailwind CSS](https://tailwindcss.com/) - CSS框架
+- [TypeScript](https://www.typescriptlang.org/) - 类型化JavaScript
+
+## 功能特性
+
+- 响应式设计，适配各种屏幕尺寸
+- 现代化UI界面
+- 首页展示公司概览和服务亮点
+- 关于我们页面，包含公司历史和团队介绍
+- 产品服务页面，展示公司提供的产品和服务
+- 新闻动态页面，展示公司新闻和行业资讯
+- 联系我们页面，包含联系表单和公司联系信息
+
+## 如何运行
+
+### 安装依赖
+
+```bash
+npm install
+```
+
+### 开发模式
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+打开 [http://localhost:3000](http://localhost:3000) 查看网站。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 构建生产版本
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+### 运行生产版本
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 项目结构
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+/
+├── public/            # 静态资源
+├── src/               # 源代码
+│   ├── app/           # Next.js App Router 页面
+│   │   ├── about/     # 关于我们页面
+│   │   ├── contact/   # 联系我们页面
+│   │   ├── news/      # 新闻动态页面
+│   │   ├── services/  # 产品服务页面
+│   │   ├── layout.tsx # 根布局组件
+│   │   └── page.tsx   # 首页
+│   └── components/    # 可复用组件
+│       ├── Navbar.tsx # 导航栏组件
+│       └── Footer.tsx # 页脚组件
+├── .gitignore         # Git忽略文件
+├── next.config.ts     # Next.js配置
+├── package.json       # 项目依赖
+├── README.md          # 项目说明
+└── tsconfig.json      # TypeScript配置
+```
 
-## Deploy on Vercel
+## 后续开发
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- 集成真实的后端API
+- 添加多语言支持
+- 实现新闻详情页
+- 添加搜索功能
+- 集成更多交互动画
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 许可证
+
+[MIT](LICENSE)
+
+# 使用Node.js官方镜像作为基础镜像
+FROM node:18-alpine AS builder
+
+# 设置工作目录
+WORKDIR /app
+
+# 复制package.json和package-lock.json
+COPY package*.json ./
+
+# 安装依赖
+RUN npm ci
+
+# 复制所有文件
+COPY . .
+
+# 构建应用
+RUN npm run build
+
+# 生产环境阶段
+FROM node:18-alpine AS runner
+
+WORKDIR /app
+
+# 设置为生产环境
+ENV NODE_ENV=production
+
+# 复制必要文件
+COPY --from=builder /app/next.config.js ./
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
+
+# 暴露端口
+EXPOSE 3000
+
+# 启动应用
+CMD ["npm", "start"]
